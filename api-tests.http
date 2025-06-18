@@ -1,0 +1,85 @@
+### Housing Agent Backend API Tests
+### Use REST Client extension in VS Code
+
+### Variables
+@baseUrl = http://localhost:3000
+@userEmail = omotosomarytaiwo@gmail.com
+@userPassword = password123
+
+### 1. Test Server Connection
+GET {{baseUrl}}/api/listings
+
+### 2. User Registration
+POST {{baseUrl}}/api/register
+Content-Type: application/json
+
+{
+  "email": "newuser@example.com",
+  "password": "securepass123",
+  "userType": "agent"
+}
+
+### 3. User Login
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+  "email": "{{userEmail}}",
+  "password": "{{userPassword}}"
+}
+
+### 4. Get All Listings
+GET {{baseUrl}}/api/listings
+
+### 5. Create New Listing (Text Only)
+POST {{baseUrl}}/api/listings
+Content-Type: application/json
+
+{
+  "title": "Modern 3-Bedroom Apartment",
+  "location": "Lekki, Lagos",
+  "price": 25000000,
+  "description": "Beautiful apartment with sea view and modern amenities",
+  "latitude": 6.5244,
+  "longitude": 3.3792
+}
+
+### 6. Get Chat Messages
+GET {{baseUrl}}/api/chat
+
+### 7. Send Chat Message
+POST {{baseUrl}}/api/chat
+Content-Type: application/json
+
+{
+  "text": "I have a perfect 2-bedroom apartment in Akobo area"
+}
+
+### 8. Test Error - Invalid Registration
+POST {{baseUrl}}/api/register
+Content-Type: application/json
+
+{
+  "email": "invalid-email",
+  "password": "123",
+  "userType": "invalid"
+}
+
+### 9. Test Error - Duplicate Email
+POST {{baseUrl}}/api/register
+Content-Type: application/json
+
+{
+  "email": "{{userEmail}}",
+  "password": "password123",
+  "userType": "agent"
+}
+
+### 10. Test Error - Invalid Login
+POST {{baseUrl}}/api/login
+Content-Type: application/json
+
+{
+  "email": "nonexistent@email.com",
+  "password": "wrongpassword"
+} 
